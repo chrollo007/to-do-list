@@ -1,4 +1,38 @@
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: none;
+    position: fixed;
+    top: 25%;
+    left: 40%;
+    padding: 40px;
+    border: 1px solid black;
+    background-color: aqua;
+}
+.extra{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#save{
+    display: flex;
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+}
+#desc{
+    margin: 10px;
+}
+#heading{
+    margin: 10px;
+}
+#date{
+    margin: 10px;
+}
 .navbar{
+    position: fixed;
     display: flex;
     flex-direction: column;
     height: 650px;
@@ -13,4 +47,11 @@
 }
 li{
     list-style: none;
+}
+.inbox{
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 10%;
+    left: 25%;
 }
