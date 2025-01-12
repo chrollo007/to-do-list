@@ -5,11 +5,13 @@ const heading=document.querySelector("#Heading")
 
 const save=document.querySelector("#save")
 const inbox=document.querySelector(".inbox")
-const ib=document.querySelector(".ib");
 
 const desc=document.querySelector("#desc");
 const dt=document.querySelector("#date");
 const pre=document.querySelector("#pre");
+
+const ul=document.querySelector(".ul")
+
 
 const mynotes=[];
 
@@ -28,20 +30,30 @@ function addnotes(Heading,descrition,date,priority){
 
 let flag=false;
 save.addEventListener("click",()=>{
-    ib.innerHTML=heading.value
+    const li=document.createElement("li");
+const btn=document.createElement("button")
+    ul.appendChild(li);
+    btn.classList.add("ib");
+    li.appendChild(btn).innerHTML=heading.value
     card.style.display="none";
     addnotes(heading.value,desc.value,dt.value,pre.value);
-    mynotes.forEach((mynote)=>{
-        console.log(mynote);
-    })
     flag=false;
-})
 
-ib.addEventListener("click",(event)=>{
+
+    const ibs=document.querySelectorAll(".ib");
+
+ibs.forEach(i=>{
+    i.addEventListener("click",(event)=>{
+        console.log("hello")
     event.stopPropagation();
     card.style.display="flex";
     flag=true;
+});
+});
 })
+
+
+
 
 task.addEventListener("click",(event)=>{
    event.stopPropagation();
