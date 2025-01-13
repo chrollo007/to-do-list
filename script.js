@@ -9,6 +9,10 @@ const mynotes=[];
 let flag=false;
 
 function createCard(){
+
+
+
+    if (card.querySelector("input")) return;
     const heading=document.createElement("input");
     heading.type="text";
     heading.id="Heading";
@@ -38,6 +42,8 @@ function createCard(){
    div.appendChild(save);
    card.appendChild(div)
 
+   
+
     function notes(Heading,descrition,date,priority){
         this.Heading=Heading;
         this.descrition=descrition
@@ -55,27 +61,51 @@ function createCard(){
     save.addEventListener("click",()=>{
         const li=document.createElement("li");
         const btn=document.createElement("button")
+
+        const noteIndex = mynotes.length;
+
         ul.appendChild(li);
         btn.classList.add("ib");
         li.appendChild(btn).innerHTML=heading.value
         card.style.display="none";
+
+        btn.dataset.index = noteIndex; 
+
         addnotes(heading.value,desc.value,dt.value,pre.value);
         flag=false;
     
-    
+
+
         const ibs=document.querySelectorAll(".ib");
     
                   ibs.forEach(i=>{
                         i.addEventListener("click",(event)=>{
                         event.stopPropagation();
-                        card.style.display="flex";
-                        flag=true;
-                        card.innerHTML=" ";
-                        extra.innerHTML="";
-    });
-    });
-    });
+                        const index=event.target.dataset.index;
+                        createCard();
+                        if(flag==false){
+                            flag=true;
+                            heading.value=mynotes[index].Heading;
+                            console.log(mynotes[index].Heading);
+                            desc.value=mynotes[index].descrition;
+                            dt.value=mynotes[index].date;
+                            pre.value=mynotes[index].priority;
+                            card.style.display="flex";
+                        }
+                    });
+                });
    
+    });
+    const closeBtn = document.querySelector(".close-btn");
+closeBtn.addEventListener("click", () => {
+    card.style.display = "none";
+    heading.value="";
+    desc.value="";
+    dt.value="";
+    pre.value="";
+    card.value="";
+});
+
 }
 
 
@@ -84,13 +114,12 @@ function createCard(){
 
 task.addEventListener("click",(event)=>{
     if(flag==true){
-        card.innerHTML=" ";
-        extra.innerHTML="";
+        card.style.display="none";
         return;
     }
-    createCard();
    event.stopPropagation();
-    if(flag===false){
+    if(flag==false){
+    createCard();
     card.style.display="flex";
     flag=true;
     }
@@ -102,8 +131,10 @@ card.addEventListener("click",(event)=>{
 })
 
 document.body.addEventListener("click",()=>{
-    if(flag===true){
+    if(flag==true){
     card.style.display="none";
     flag=false;
+    return;
     }
 })
+
